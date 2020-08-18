@@ -1,0 +1,28 @@
+.card {
+  background-color: $athens-gray;
+  margin: 15px 0;
+
+  @include e(heading) {
+    background-color: $ebony-clay;
+    color: $white;
+    padding: 8px;
+  }
+
+  @include e(body) {
+    padding: 8px; 
+  }
+
+  @include e(buttons) {
+    float: right;
+    padding: 15px;
+
+    .btn {
+      margin-right: 8px;
+    }
+  }
+
+  @include e(footer) {
+    background-color: $catskill-white;
+    cursor: auto;
+  }
+}
