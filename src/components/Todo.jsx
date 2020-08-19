@@ -12,10 +12,10 @@ const Todo = (props) => {
     <li className="todo__item">
       {props.title && (
         <div className="card">
-          <h1 onClick={props.onClick} className={`card__heading${props.isCompleted ? ' line-through' : ''}`}>
+          <h1 onClick={(e) => onClick(props)} className={`card__heading${props.isCompleted ? ' line-through' : ''}`}>
             {props.title}
           </h1>
-          <div onClick={props.onClick} className={`card__body${props.isCompleted ? ' line-through' : ''}`}>
+          <div onClick={(e) => onClick(props)} className={`card__body${props.isCompleted ? ' line-through' : ''}`}>
             {props.description}
           </div>
           <div className="card__footer">
@@ -46,6 +46,22 @@ const Todo = (props) => {
       )}
     </li>
   );
+};
+
+const onClick = (props) => {
+  http.put(
+    `/todos/${props.id}`,
+    {
+      title: props.title,
+      description: props.description,
+      iscompleted: `${!props.isCompleted}`
+    },
+    CookieManager.getCookie('token')
+  ).then(res=>{
+    if(res.data) {
+      props.onClick();
+    }
+  });
 };
 
 const onDelete = (props) => {

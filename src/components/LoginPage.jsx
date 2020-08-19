@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
+import Error from './Error';
 import http from '../utils/http';
 import CookieManager from '../utils/cookie';
 import * as apiActions from '../redux/actions/apiActions';
-import { Link } from 'react-router-dom';
-import Error from './Error';
 
 const LoginPage = (props) => {
   const [error, setError] = useState(undefined);
