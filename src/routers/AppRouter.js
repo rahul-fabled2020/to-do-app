@@ -12,7 +12,7 @@ const DefaultPage = () => (
 );
 
 const AppRouter = () => (
-  <BrowserRouter basename="/">
+  <BrowserRouter basename="/leapfrog/todo-app/">
     <div>
       <Switch>
         <Route path="/" component={App} exact={true} />
