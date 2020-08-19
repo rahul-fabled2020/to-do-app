@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import http from '../utils/http';
 import CookieManager from '../utils/cookie';
 import * as apiActions from '../redux/actions/apiActions';
+import { Link } from 'react-router-dom';
+import Error from './Error';
 
 const LoginPage = (props) => {
+  const [error, setError] = useState(undefined);
+
   return (
     <div>
-      <form action="#" className="form login__form" onSubmit={(e) => onSubmit(e, props)}>
+      {error && <Error message={error} />}
+      <form action="#" className="form login__form" onSubmit={(e) => onSubmit(e, props, setError)}>
         <div className="container">
           <div className="form__group">
             <label htmlFor="username" className="form__label">
@@ -21,19 +26,19 @@ const LoginPage = (props) => {
             <label htmlFor="password" className="form__label">
               Password
             </label>
-            <input type="password" className="form__input" name="password" placeholder="Enter Password" required />
+            <input type="password"  className="form__input" name="password" placeholder="Enter Password" required />
           </div>
 
           <div className="form__group">
             <button type="submit" className="btn btn-primary form__btn">
-              Submit
+              Login
             </button>
           </div>
         </div>
 
         <div className="container">
           <div className="form__footer">
-            Don't have an account? <a href="/">Register</a>
+            Don't have an account? <Link to="/register">Register</Link>
           </div>
         </div>
       </form>
@@ -41,7 +46,7 @@ const LoginPage = (props) => {
   );
 };
 
-function onSubmit(e, props) {
+function onSubmit(e, props, setError) {
   e.preventDefault();
 
   const username = e.target.username.value;
@@ -63,7 +68,7 @@ function onSubmit(e, props) {
 
         props.history.push('/');
       }else {
-        //error
+        setError(res.error.message);
       }
     })
     .catch((err) => console.log(err));
