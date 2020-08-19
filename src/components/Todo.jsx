@@ -13,7 +13,8 @@ const Todo = (props) => {
       {props.title && (
         <div className="card">
           <h1 onClick={(e) => onClick(props)} className={`card__heading${props.isCompleted ? ' line-through' : ''}`}>
-            {props.title}
+            <input type="checkbox" name="status" checked={props.isCompleted} />
+            {" "+props.title}
           </h1>
           <div onClick={(e) => onClick(props)} className={`card__body${props.isCompleted ? ' line-through' : ''}`}>
             {props.description}
